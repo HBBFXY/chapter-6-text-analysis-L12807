@@ -1,16 +1,15 @@
-# 接收用户输入的字符串
-text = input("请输入需要分析的字符串：")
+from collections import Counter
 
-# 统计字符频率
-char_count = {}
-for char in text:
-    # 若字符已在字典中，计数+1；否则初始化为1
-    char_count[char] = char_count.get(char, 0) + 1
+# 接收输入
+user_input = input("请输入待分析的字符串：")
 
-# 按频率降序排序（sorted返回列表，元素为(字符, 频率)的元组）
-sorted_chars = sorted(char_count.items(), key=lambda x: x[1], reverse=True)
+# 统计字符频率（Counter直接生成频率字典）
+freq_counter = Counter(user_input)
 
-# 打印结果
-print("字符出现频率（降序）：")
-for char, count in sorted_chars:
-    print(f"字符 '{char}'：出现 {count} 次")
+# 按频率降序排序
+sorted_freq = sorted(freq_counter.items(), key=lambda item: item[1], reverse=True)
+
+# 输出结果
+print("字符频率（降序）：")
+for char, count in sorted_freq:
+    print(f"'{char}'：{count} 次")
