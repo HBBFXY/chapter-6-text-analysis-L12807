@@ -1,28 +1,25 @@
-def analyze_text():
-    # 接收输入并统一转为小写（忽略大小写）
-    text = input("请输入待分析的文本：").lower()
+def analyze_letter_frequency():
+    # 接收用户输入
+    user_input = input("请输入待分析的字符串：")
     
-    # 初始化字典，仅统计字母
-    letter_freq = {}
-    for char in text:
-        # 仅处理字母字符
+    # 统计字母频率（仅保留字母）
+    letter_counts = {}
+    for char in user_input:
         if char.isalpha():
-            letter_freq[char] = letter_freq.get(char, 0) + 1
+            letter_counts[char] = letter_counts.get(char, 0) + 1
     
-    # 按频率降序排序，若频率相同则按字母升序排列
-    sorted_letters = sorted(
-        letter_freq.items(),
-        key=lambda x: (-x[1], x[0])  # 先按频率降序，再按字母升序
-    )
+    # 按频率降序排序
+    sorted_letters = sorted(letter_counts.items(), key=lambda x: x[1], reverse=True)
     
     # 输出结果
     if not sorted_letters:
-        print("文本中未包含字母。")
+        print("输入中未包含字母。")
         return
     
-    print("字母出现频率（降序，频率相同按字母排序）：")
+    print("\n=== 字母频率统计结果（降序） ===")
     for letter, count in sorted_letters:
-        print(f"字母 '{letter}'：{count} 次")
+        print(f"'{letter}'：出现 {count} 次")
 
-# 调用函数
-analyze_text()
+# 主程序入口（确保在GitHub环境中可直接运行）
+if __name__ == "__main__":
+    analyze_letter_frequency()
